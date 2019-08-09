@@ -35,7 +35,7 @@ def main():
     if args.window_size:
         window_size = [int(x) for x in args.window_size.split("x")]
     else:
-        window_size = (1200, 800)
+        window_size = (1920, 1203)
 
     if args.log_info:
         log_level = INFO
