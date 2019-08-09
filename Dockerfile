@@ -1,5 +1,4 @@
 FROM python:3.6.4
-MAINTAINER mokemokechicken@gmail.com
 
 WORKDIR /tmp
 
@@ -9,13 +8,13 @@ RUN sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc
     apt-get install -y google-chrome-stable
 
 RUN apt-get install -y unzip && \
-    curl -LO https://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip && \
+    curl -LO https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip && \
     unzip chromedriver_linux64.zip && \
     mv chromedriver /usr/local/bin/
 
 RUN apt-get -y install fonts-ipafont-gothic fonts-ipafont-mincho
-ENV LANG=ja_JP.UTF-8
-ENV LANGUAGE="ja_JP:ja"
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE="en_US:en"
 
 ADD requirements.txt /tmp/
 RUN pip install -r requirements.txt

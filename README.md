@@ -1,23 +1,17 @@
 About
 =======
 
-Webページ全体のScreenShot画像を取得するDockerコンテナです。
-Google Chromeのheadlessを使っています。
-縦長のWebページでもだいたい上手くScreenShotをとることができます。
-固定ヘッダーがあっても概ね大丈夫ですが、固定フッターはおそらく変な結果になると思います。
+This is adapted from the original version `mokemokechicken/capture_web`. 
 
-Requirements
-------------
-以下の環境で動作を確認しています。
+Captures web screenshots with headless Chrome 76 & Selenium.
 
-* macOS High Sierra 0.13.3
-* Docker Community Edition Version 18.03.0-ce-mac59
+Tested on macOS Mojave w/ Docker CE 19.03.1, it should work fine elsewhere?
 
 How To Use
 =========
 
 ```bash
-docker run -v `pwd`:/tmp/screenshot mokemokechicken/capture_web <URL> <output_image.png> [options]
+docker run -v `pwd`:/tmp/screenshot jonsoini/capture_web <URL> <output_image.png> [options]
 ```
 
 or
@@ -26,29 +20,29 @@ or
 ./capture <URL> <output_image.png> [options]
 ```
 
-例
+## Running with arguments
 ----
 
 ### PC
 ```bash
-docker run -v `pwd`:/tmp/screenshot mokemokechicken/capture_web "https://www.yahoo.co.jp/" yahoo_pc.png
+docker run -v `pwd`:/tmp/screenshot jonsoini/capture_web "https://news.google.com/" google_news.png
 ```
 
 ### iPhone
 ```bash
-docker run -v `pwd`:/tmp/screenshot mokemokechicken/capture_web "https://www.yahoo.co.jp/" yahoo_sp.png -w 414x735 --ua 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1'
+docker run -v `pwd`:/tmp/screenshot jonsoini/capture_web "https://news.google.com/" google_news_sp.png -w 414x735 --ua 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1'
 ```
 
 HELP
 ----
 
 ```bash
-% docker run -v `pwd`:/tmp/screenshot mokemokechicken/capture_web
+% docker run -v `pwd`:/tmp/screenshot jonsoini/capture_web
 usage: screenshot.py [-h] [-w WINDOW_SIZE] [--ua USER_AGENT] [--wait WAIT]
                      [-v] [--vv]
                      url filename
 
-positional arguments:
+required arguments:
   url              specify URL
   filename         specify capture image filename
 
