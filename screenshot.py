@@ -35,7 +35,7 @@ def main():
     if args.window_size:
         window_size = [int(x) for x in args.window_size.split("x")]
     else:
-        window_size = (1920, 1203)
+        window_size = (1920, 1080)
 
     if args.log_info:
         log_level = INFO
@@ -61,7 +61,18 @@ def capture_full_screenshot(url, filename, window_size=None, user_agent=None, wa
     """
     options = webdriver.ChromeOptions()
     options.set_headless()
-    options.add_argument('--no-sandbox')
+
+    # ChromeDriver was failing with timeouts on certain pages unless the options below were added
+    # Sourced from https://stackoverflow.com/questions/48450594/selenium-timed-out-receiving-message-from-renderer  
+    options.add_argument("start-maximized")
+    options.add_argument("enable-automation")
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-browser-side-navigation")
+    options.add_argument("--disable-gpu")
+
     desired_capabilities = dict(acceptInsecureCerts=True)
     if user_agent:
         options.add_argument(f"user-agent={user_agent}")
